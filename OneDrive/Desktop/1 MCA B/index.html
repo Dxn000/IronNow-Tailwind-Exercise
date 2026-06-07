@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="IronNow – On-Demand Ironing Service. Book trusted local ironing professionals in seconds." />
+  <title>IronNow | On-Demand Ironing Service</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { poppins: ['Poppins', 'sans-serif'] }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    * { font-family: 'Poppins', sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { background: #fff; color: #0F172A; overflow-x: hidden; }
+
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #F1F5F9; }
+    ::-webkit-scrollbar-thumb { background: #2563EB; border-radius: 10px; }
+
+    /* Gradient text */
+    .grad-blue {
+      background: linear-gradient(135deg, #2563EB, #4F46E5);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .grad-green {
+      background: linear-gradient(135deg, #10B981, #2563EB);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    /* Navbar */
+    #site-header {
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid #E2E8F0;
+      transition: box-shadow 0.3s;
+    }
+    #site-header.scrolled { box-shadow: 0 2px 20px rgba(37,99,235,0.08); }
+
+    /* Mobile menu */
+    #mob-menu { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.35s ease, opacity 0.3s; }
+    #mob-menu.open { max-height: 400px; opacity: 1; }
+
+    /* Section bg image utility */
+    .bg-section-img {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      position: relative;
+    }
+    .bg-section-img::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .bg-section-img > * { position: relative; z-index: 1; }
+
+    /* Hero dark overlay */
+    .hero-overlay::before { background: linear-gradient(135deg, rgba(15,23,42,0.88) 0%, rgba(30,58,138,0.82) 60%, rgba(49,46,129,0.80) 100%); }
+
+    /* About light overlay */
+    .about-overlay::before { background: rgba(248,250,252,0.90); }
+
+    /* How it works overlay */
+    .hiw-overlay::before { background: rgba(255,255,255,0.91); }
+
+    /* Input focus */
+    .inp:focus { outline: none; border-color: #2563EB; box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
+
+    /* Card hover */
+    .card-hover { transition: transform 0.22s ease, box-shadow 0.22s ease; }
+    .card-hover:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(0,0,0,0.09); }
+
+    /* Section label */
+    .pill {
+      display: inline-block; padding: 4px 14px; border-radius: 999px;
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+    }
+
+    /* Step number badge */
+    .step-num {
+      width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, #2563EB, #4F46E5);
+      color: #fff; font-weight: 800; font-size: 0.8rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* Tracking status */
+    .track-done  { background: rgba(16,185,129,0.10); border: 1px solid rgba(16,185,129,0.25); }
+    .track-live  { background: rgba(251,191,36,0.10);  border: 1px solid rgba(251,191,36,0.30); }
+    .track-pend  { opacity: 0.38; }
+  </style>
+</head>
+
+<body>
+
+<!-- ═══════════════════════════════════ -->
+<!--  NAVBAR                             -->
+<!-- ═══════════════════════════════════ -->
+<header id="site-header" class="sticky top-0 z-50">
+  <nav class="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12">
+    <div class="flex items-center justify-between h-16">
+
+      <!-- Logo -->
+      <a href="#home" class="flex items-center gap-2.5" aria-label="IronNow Home">
+        <img src="logo.png" alt="IronNow logo" class="h-10 w-auto object-contain" />
+        <div>
+          <div class="text-lg font-black grad-blue leading-tight">IronNow</div>
+          <div class="text-[9px] font-medium text-slate-400 tracking-widest">On-Demand Ironing</div>
+        </div>
+      </a>
+
+      <!-- Desktop links -->
+      <ul class="hidden md:flex items-center gap-0.5 text-sm font-medium text-slate-600">
+        <li><a href="#home"         class="px-3 py-1.5 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors">Home</a></li>
+        <li><a href="#about"        class="px-3 py-1.5 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors">About</a></li>
+        <li><a href="#how-it-works" class="px-3 py-1.5 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors">How It Works</a></li>
+        <li><a href="#features"     class="px-3 py-1.5 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors">Features</a></li>
+        <li><a href="#tracking"     class="px-3 py-1.5 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors">Tracking</a></li>
+        <li><a href="#contact"      class="px-3 py-1.5 rounded-lg hover:bg-blue-50 hover:text-blue-600 transition-colors">Contact</a></li>
+      </ul>
+
+      <div class="flex items-center gap-2">
+        <a href="#contact" class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 bg-[#2563EB] text-white text-sm font-semibold rounded-xl hover:bg-blue-700 transition-colors">
+          📅 Book Now
+        </a>
+        <button id="ham-btn" aria-label="Toggle menu" aria-expanded="false" class="md:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors">
+          <svg class="w-5 h-5 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mob-menu">
+      <ul class="py-3 pb-4 space-y-0.5 text-sm font-medium border-t border-slate-100">
+        <li><a href="#home"         class="block px-4 py-2.5 rounded-xl text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Home</a></li>
+        <li><a href="#about"        class="block px-4 py-2.5 rounded-xl text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">About</a></li>
+        <li><a href="#how-it-works" class="block px-4 py-2.5 rounded-xl text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">How It Works</a></li>
+        <li><a href="#features"     class="block px-4 py-2.5 rounded-xl text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Features</a></li>
+        <li><a href="#tracking"     class="block px-4 py-2.5 rounded-xl text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Tracking</a></li>
+        <li><a href="#contact"      class="block px-4 py-2.5 rounded-xl text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">Contact</a></li>
+        <li class="pt-1"><a href="#contact" class="block text-center px-4 py-2.5 bg-[#2563EB] text-white font-semibold rounded-xl hover:bg-blue-700 transition-colors">Book Now</a></li>
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+<!-- ═══════════════════════════════════ -->
+<!--  HERO — bg image, dark overlay      -->
+<!-- ═══════════════════════════════════ -->
+<section id="home"
+  class="bg-section-img hero-overlay"
+  style="background-image: url('hero.png'); min-height: 88vh; display:flex; align-items:center;"
+  aria-label="Hero">
+
+  <div class="relative z-10 w-full max-w-5xl mx-auto px-5 sm:px-8 lg:px-12 py-20 text-center">
+    <div class="flex flex-col items-center">
+
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 mb-7">
+        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+        <span class="text-xs font-bold text-white/80 tracking-widest uppercase">Hyper-Local Ironing Marketplace</span>
+      </div>
+
+      <!-- Headline -->
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-tight mb-5">
+        Freshly Ironed Clothes,<br/>
+        <span style="background:linear-gradient(135deg,#60A5FA,#A5B4FC,#34D399);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">
+          Delivered To Your Doorstep.
+        </span>
+      </h1>
+
+      <p class="text-slate-300 text-lg leading-relaxed mb-9 max-w-2xl">
+        Book trusted local ironing professionals in seconds.
+        Pickup, ironing and doorstep delivery — all managed from one platform.
+      </p>
+
+      <!-- Booking form -->
+      <div class="bg-white/10 backdrop-blur border border-white/20 rounded-2xl p-5 w-full max-w-lg">
+        <div class="flex flex-col gap-3">
+          <div class="relative">
+            <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-base pointer-events-none">📍</span>
+            <input id="pickup-addr" type="text" placeholder="Enter Pickup Address"
+              class="inp w-full pl-10 pr-4 py-3 border-2 border-white/30 rounded-xl text-sm text-white placeholder-white/50 bg-white/10 transition-all" />
+          </div>
+          <div class="relative">
+            <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-base pointer-events-none">👕</span>
+            <select id="garment-sel" class="inp w-full pl-10 pr-8 py-3 border-2 border-white/30 rounded-xl text-sm text-white bg-white/10 appearance-none cursor-pointer transition-all">
+              <option value="" disabled selected class="text-slate-900">Select Garment Type</option>
+              <option value="shirts"   class="text-slate-900">Shirts</option>
+              <option value="tshirts"  class="text-slate-900">T-Shirts</option>
+              <option value="trousers" class="text-slate-900">Trousers</option>
+              <option value="mixed"    class="text-slate-900">Mixed Garments</option>
+            </select>
+            <svg class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/60 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </div>
+          <button id="book-btn" type="button"
+            class="w-full py-3.5 bg-[#2563EB] text-white font-bold rounded-xl hover:bg-blue-500 transition-colors text-sm">
+            🚀 Schedule Pickup
+          </button>
+        </div>
+      </div>
+
+      <!-- Social proof -->
+      <div class="flex items-center justify-center gap-3 mt-6">
+        <div class="flex -space-x-2">
+          <div class="w-8 h-8 rounded-full border-2 border-white/40 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-xs text-white font-bold">R</div>
+          <div class="w-8 h-8 rounded-full border-2 border-white/40 bg-gradient-to-br from-violet-400 to-indigo-600 flex items-center justify-center text-xs text-white font-bold">A</div>
+          <div class="w-8 h-8 rounded-full border-2 border-white/40 bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center text-xs text-white font-bold">K</div>
+          <div class="w-8 h-8 rounded-full border-2 border-white/40 bg-gradient-to-br from-pink-400 to-rose-600 flex items-center justify-center text-xs text-white font-bold">P</div>
+        </div>
+        <span class="text-xs text-slate-300"><span class="text-white font-bold">500+</span> happy customers this week</span>
+      </div>
+    </div>
+
+    <!-- Stats row at bottom -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-16">
+      <div class="bg-white/10 border border-white/15 rounded-xl py-4 px-4 text-center">
+        <div class="text-2xl font-black text-white">500+</div>
+        <div class="text-xs text-slate-300 mt-0.5">Orders Completed</div>
+      </div>
+      <div class="bg-white/10 border border-white/15 rounded-xl py-4 px-4 text-center">
+        <div class="text-2xl font-black text-emerald-400">50+</div>
+        <div class="text-xs text-slate-300 mt-0.5">Ironing Partners</div>
+      </div>
+      <div class="bg-white/10 border border-white/15 rounded-xl py-4 px-4 text-center">
+        <div class="text-2xl font-black text-white">98%</div>
+        <div class="text-xs text-slate-300 mt-0.5">Satisfaction Rate</div>
+      </div>
+      <div class="bg-white/10 border border-white/15 rounded-xl py-4 px-4 text-center">
+        <div class="text-2xl font-black text-amber-400">4.9★</div>
+        <div class="text-xs text-slate-300 mt-0.5">App Rating</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ -->
+<!--  ABOUT — bg image, light overlay    -->
+<!-- ═══════════════════════════════════ -->
+<section id="about"
+  class="bg-section-img about-overlay"
+  style="background-image: url('about.png');"
+  aria-label="About IronNow">
+
+  <div class="relative z-10 w-full max-w-5xl mx-auto px-5 sm:px-8 lg:px-12 py-20 text-center">
+
+    <!-- Section label -->
+    <div class="mb-10">
+      <span class="pill bg-indigo-100 text-indigo-700 border border-indigo-200">Our Story</span>
+      <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mt-3 mb-2">About <span class="grad-blue">IronNow</span></h2>
+      <p class="text-slate-600 text-base max-w-xl mx-auto">Simplifying garment care across your city — one order at a time.</p>
+    </div>
+
+    <!-- Prose content in a semi-transparent card -->
+    <div class="max-w-4xl mx-auto">
+      <div class="bg-white/85 backdrop-blur rounded-2xl shadow-lg border border-white/60 p-7 sm:p-10 text-left">
+        <article class="prose prose-base max-w-none prose-headings:font-bold prose-headings:text-slate-900 prose-p:text-slate-600 prose-p:leading-relaxed prose-strong:text-[#2563EB] prose-li:text-slate-600">
+          <h2>What is IronNow?</h2>
+          <p><strong>IronNow</strong> is a hyper-local, on-demand ironing marketplace that connects customers with trusted, professional ironing service providers in their neighbourhood — making garment care effortless from pickup to doorstep delivery.</p>
+          <h3>The Problem We Solve</h3>
+          <p>Traditional ironing shops demand inconvenient trips, long waits, and zero order visibility. Thousands of skilled local professionals also lack a digital platform to grow. <strong>IronNow bridges this gap</strong> — creating a two-sided marketplace that benefits everyone.</p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 not-prose mt-4">
+            <div>
+              <h4 class="font-bold text-slate-900 mb-2 text-sm uppercase tracking-wide">✅ For Customers</h4>
+              <ul class="space-y-1.5 text-sm text-slate-600">
+                <li class="flex items-start gap-2"><span class="text-blue-500 mt-0.5">•</span><span><strong class="text-slate-800">Convenience</strong> — Book from home, any time</span></li>
+                <li class="flex items-start gap-2"><span class="text-blue-500 mt-0.5">•</span><span><strong class="text-slate-800">Transparency</strong> — Real-time order tracking</span></li>
+                <li class="flex items-start gap-2"><span class="text-blue-500 mt-0.5">•</span><span><strong class="text-slate-800">Quality</strong> — Only verified professionals</span></li>
+                <li class="flex items-start gap-2"><span class="text-blue-500 mt-0.5">•</span><span><strong class="text-slate-800">Affordable</strong> — Per-garment, no hidden fees</span></li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-bold text-slate-900 mb-2 text-sm uppercase tracking-wide">🌱 For Professionals</h4>
+              <ul class="space-y-1.5 text-sm text-slate-600">
+                <li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">•</span><span><strong class="text-slate-800">Steady Income</strong> — Continuous order stream</span></li>
+                <li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">•</span><span><strong class="text-slate-800">Digital Presence</strong> — Grow a rated client base</span></li>
+                <li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">•</span><span><strong class="text-slate-800">Flexible Hours</strong> — Work at your own pace</span></li>
+                <li class="flex items-start gap-2"><span class="text-green-500 mt-0.5">•</span><span><strong class="text-slate-800">Cashless</strong> — Secure, on-time payouts</span></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ -->
+<!--  HOW IT WORKS — bg image, white overlay -->
+<!-- ═══════════════════════════════════ -->
+<section id="how-it-works"
+  class="bg-section-img hiw-overlay"
+  style="background-image: url('howitworks.png');"
+  aria-label="How IronNow Works">
+
+  <div class="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 py-20">
+
+    <div class="text-center mb-12">
+      <span class="pill bg-blue-100 text-blue-700 border border-blue-200">Simple Process</span>
+      <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mt-3 mb-2">How It <span class="grad-blue">Works</span></h2>
+      <p class="text-slate-600">Four easy steps to fresh, wrinkle-free clothes.</p>
+    </div>
+
+    <!-- Steps grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+      <div class="card-hover bg-white/88 backdrop-blur border border-blue-100 rounded-2xl p-6 shadow-md">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="step-num">01</div>
+          <span class="text-2xl">📱</span>
+        </div>
+        <h3 class="font-bold text-slate-900 mb-2">Book Service</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">Enter pickup address, choose garments, and schedule a slot — done in under 60 seconds.</p>
+      </div>
+
+      <div class="card-hover bg-white/88 backdrop-blur border border-indigo-100 rounded-2xl p-6 shadow-md">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="step-num" style="background:linear-gradient(135deg,#4F46E5,#7C3AED);">02</div>
+          <span class="text-2xl">🚚</span>
+        </div>
+        <h3 class="font-bold text-slate-900 mb-2">Pickup</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">A verified local partner arrives at your doorstep to collect garments — no waiting, no hassle.</p>
+      </div>
+
+      <div class="card-hover bg-white/88 backdrop-blur border border-orange-100 rounded-2xl p-6 shadow-md">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="step-num" style="background:linear-gradient(135deg,#F97316,#EF4444);">03</div>
+          <span class="text-2xl">🔥</span>
+        </div>
+        <h3 class="font-bold text-slate-900 mb-2">Professional Ironing</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">Skilled professionals press every garment to perfection using industry-grade steam equipment.</p>
+      </div>
+
+      <div class="card-hover bg-white/88 backdrop-blur border border-green-100 rounded-2xl p-6 shadow-md">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="step-num" style="background:linear-gradient(135deg,#10B981,#059669);">04</div>
+          <span class="text-2xl">🏠</span>
+        </div>
+        <h3 class="font-bold text-slate-900 mb-2">Delivery</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">Freshly ironed, neatly packaged clothes delivered right back to your door — ready to wear.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ -->
+<!--  FEATURES — plain light bg          -->
+<!-- ═══════════════════════════════════ -->
+<section id="features" class="py-20 px-5 sm:px-8 lg:px-12" style="background:#F8FAFC;" aria-label="Features">
+  <div class="max-w-7xl mx-auto">
+
+    <div class="text-center mb-12">
+      <span class="pill bg-emerald-100 text-emerald-700 border border-emerald-200">Platform Features</span>
+      <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mt-3 mb-2">Everything You <span class="grad-green">Need</span></h2>
+      <p class="text-slate-600">Built to give you the best garment care experience.</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+      <div class="card-hover bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+        <div class="w-11 h-11 rounded-xl bg-blue-50 flex items-center justify-center text-xl mb-4">📍</div>
+        <h3 class="font-bold text-slate-900 mb-2">Real-Time Tracking</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">Track every stage live — from pickup to delivery — on a single smart dashboard with instant updates.</p>
+      </div>
+
+      <div class="card-hover bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+        <div class="w-11 h-11 rounded-xl bg-indigo-50 flex items-center justify-center text-xl mb-4">💳</div>
+        <h3 class="font-bold text-slate-900 mb-2">Digital Payments</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">UPI, cards, wallets — pay securely with instant confirmation and digital receipts. No cash needed.</p>
+      </div>
+
+      <div class="card-hover bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+        <div class="w-11 h-11 rounded-xl bg-amber-50 flex items-center justify-center text-xl mb-4">⭐</div>
+        <h3 class="font-bold text-slate-900 mb-2">Verified Partners</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">Every professional is background-checked, rated, and reviewed for your complete peace of mind.</p>
+      </div>
+
+      <div class="card-hover bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+        <div class="w-11 h-11 rounded-xl bg-orange-50 flex items-center justify-center text-xl mb-4">⚡</div>
+        <h3 class="font-bold text-slate-900 mb-2">Quick Pickup</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">Same-day or next-day pickup slots available. Schedule what fits your lifestyle, hassle-free.</p>
+      </div>
+
+      <div class="card-hover bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+        <div class="w-11 h-11 rounded-xl bg-pink-50 flex items-center justify-center text-xl mb-4">🔔</div>
+        <h3 class="font-bold text-slate-900 mb-2">Live Notifications</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">Instant push & SMS alerts at every milestone — you'll always know where your clothes are.</p>
+      </div>
+
+      <div class="card-hover bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
+        <div class="w-11 h-11 rounded-xl bg-emerald-50 flex items-center justify-center text-xl mb-4">🌱</div>
+        <h3 class="font-bold text-slate-900 mb-2">Support Local Workers</h3>
+        <p class="text-sm text-slate-500 leading-relaxed">Every booking empowers local professionals, building sustainable livelihoods in your community.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ -->
+<!--  TRACKING                           -->
+<!-- ═══════════════════════════════════ -->
+<section id="tracking" class="py-20 px-5 sm:px-8 lg:px-12 bg-white" aria-label="Live Order Tracking">
+  <div class="max-w-7xl mx-auto">
+
+    <div class="text-center mb-12">
+      <span class="pill bg-blue-100 text-blue-700 border border-blue-200">Live Tracking</span>
+      <h2 class="text-3xl sm:text-4xl font-black text-slate-900 mt-3 mb-2">Track Your <span class="grad-blue">Order Live</span></h2>
+      <p class="text-slate-600">A real-time window into every step of your garment's journey.</p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 items-start">
+
+      <!-- Main tracker -->
+      <div class="lg:col-span-2 rounded-2xl overflow-hidden shadow-xl shadow-slate-900/15" style="background:linear-gradient(135deg,#0f172a,#1e293b);">
+        <!-- Header -->
+        <div class="px-6 pt-6 pb-5 border-b border-slate-700/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <div class="flex items-center gap-2.5 mb-1">
+              <h3 class="text-white font-black text-lg">Order #1024</h3>
+              <span class="px-2.5 py-0.5 bg-amber-400/20 text-amber-400 text-xs font-bold rounded-full border border-amber-400/25">In Progress</span>
+            </div>
+            <p class="text-slate-400 text-xs">Placed: 07 June 2026 · Est. Delivery: 5:30 PM</p>
+          </div>
+          <div class="flex items-center gap-2 bg-slate-800/60 border border-slate-700/40 rounded-xl px-3 py-2 w-fit">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="text-emerald-400 text-xs font-bold tracking-wide">LIVE</span>
+          </div>
+        </div>
+        <!-- Steps -->
+        <div class="px-6 py-5 space-y-2.5">
+          <div class="track-done flex items-center gap-3 rounded-xl px-4 py-3">
+            <div class="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center flex-shrink-0">
+              <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <div><p class="text-emerald-400 text-sm font-bold">Pickup Scheduled</p><p class="text-slate-500 text-xs">3:00 PM</p></div>
+          </div>
+          <div class="track-done flex items-center gap-3 rounded-xl px-4 py-3">
+            <div class="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center flex-shrink-0">
+              <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <div><p class="text-emerald-400 text-sm font-bold">Picked Up</p><p class="text-slate-500 text-xs">3:18 PM</p></div>
+          </div>
+          <div class="track-done flex items-center gap-3 rounded-xl px-4 py-3">
+            <div class="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center flex-shrink-0">
+              <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <div><p class="text-emerald-400 text-sm font-bold">At Ironing Center</p><p class="text-slate-500 text-xs">3:45 PM</p></div>
+          </div>
+          <div class="track-live flex items-center gap-3 rounded-xl px-4 py-3">
+            <div class="w-8 h-8 rounded-full bg-amber-400 flex items-center justify-center flex-shrink-0 animate-pulse">
+              <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <div><p class="text-amber-400 text-sm font-bold">⏳ Ironing In Progress</p><p class="text-slate-500 text-xs">Now · ~45 min remaining</p></div>
+          </div>
+          <div class="track-pend flex items-center gap-3 rounded-xl px-4 py-3">
+            <div class="w-8 h-8 rounded-full border-2 border-dashed border-slate-600 flex items-center justify-center flex-shrink-0"><span class="text-slate-500 text-xs">○</span></div>
+            <div><p class="text-slate-400 text-sm font-semibold">Ready For Delivery</p><p class="text-slate-600 text-xs">~5:00 PM</p></div>
+          </div>
+          <div class="track-pend flex items-center gap-3 rounded-xl px-4 py-3">
+            <div class="w-8 h-8 rounded-full border-2 border-dashed border-slate-600 flex items-center justify-center flex-shrink-0"><span class="text-slate-500 text-xs">○</span></div>
+            <div><p class="text-slate-400 text-sm font-semibold">Delivered</p><p class="text-slate-600 text-xs">~5:30 PM</p></div>
+          </div>
+        </div>
+        <!-- Footer -->
+        <div class="grid grid-cols-3 text-center px-6 py-4 border-t border-slate-700/50 gap-3">
+          <div><p class="text-slate-500 text-xs mb-0.5">Garments</p><p class="text-white font-bold text-sm">5 Items</p></div>
+          <div class="border-x border-slate-700/50"><p class="text-slate-500 text-xs mb-0.5">Partner</p><p class="text-white font-bold text-sm">Ravi K. ⭐4.9</p></div>
+          <div><p class="text-slate-500 text-xs mb-0.5">Amount</p><p class="text-emerald-400 font-bold text-sm">₹149</p></div>
+        </div>
+      </div>
+
+      <!-- Right: partner + notifications -->
+      <div class="flex flex-col gap-4">
+        <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
+          <p class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-4">Your Partner</p>
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-400 to-indigo-600 flex items-center justify-center text-xl font-black text-white">R</div>
+            <div>
+              <div class="font-bold text-slate-900 text-sm">Ravi Kumar</div>
+              <div class="text-xs text-slate-500">⭐ 4.9 · 312 orders</div>
+              <div class="flex items-center gap-1 mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span><span class="text-xs text-emerald-600 font-semibold">Online</span></div>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div class="bg-blue-50 rounded-xl p-3 text-center"><div class="font-black text-[#2563EB]">312</div><div class="text-xs text-slate-500">Orders</div></div>
+            <div class="bg-emerald-50 rounded-xl p-3 text-center"><div class="font-black text-emerald-600">4.9★</div><div class="text-xs text-slate-500">Rating</div></div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-5 border border-slate-100 shadow-sm">
+          <p class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-3">Notifications</p>
+          <div class="space-y-2.5">
+            <div class="flex items-start gap-2.5 p-3 bg-emerald-50 rounded-xl border border-emerald-100">
+              <span>✅</span>
+              <div><p class="text-xs font-semibold text-slate-800">Clothes picked up</p><p class="text-xs text-slate-400">3:18 PM · 2 hrs ago</p></div>
+            </div>
+            <div class="flex items-start gap-2.5 p-3 bg-amber-50 rounded-xl border border-amber-100">
+              <span>⏳</span>
+              <div><p class="text-xs font-semibold text-slate-800">Ironing in progress</p><p class="text-xs text-slate-400">Now · Live update</p></div>
+            </div>
+            <div class="flex items-start gap-2.5 p-3 bg-slate-50 rounded-xl border border-slate-100 opacity-50">
+              <span>🏠</span>
+              <div><p class="text-xs font-semibold text-slate-800">Delivery soon</p><p class="text-xs text-slate-400">Est. 5:30 PM</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════ -->
+<!--  CONTACT                            -->
+<!-- ═══════════════════════════════════ -->
+<section id="contact" class="py-20 px-5 sm:px-8 lg:px-12" style="background:#F8FAFC;" aria-label="Contact">
+  <div class="max-w-7xl mx-auto">
+
+    <div class="rounded-2xl overflow-hidden shadow-xl shadow-blue-900/20" style="background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 55%,#312e81 100%);">
+      <div class="px-8 sm:px-12 lg:px-16 py-16 text-center">
+
+        <h2 class="text-3xl sm:text-4xl font-black text-white mb-3">
+          Ready for
+          <span style="background:linear-gradient(135deg,#34D399,#60A5FA);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;"> Wrinkle-Free</span>
+          Living?
+        </h2>
+        <p class="text-slate-300 text-base leading-relaxed mb-10 max-w-lg mx-auto">
+          Join IronNow today and simplify garment care. Professional ironing, delivered to your doorstep.
+        </p>
+
+        <!-- Contact cards -->
+        <div class="flex flex-col sm:flex-row justify-center gap-4 mb-10">
+          <a href="mailto:support@ironnow.com" class="flex items-center gap-3 bg-white/10 hover:bg-white/20 border border-white/15 rounded-xl px-6 py-4 text-left transition-colors">
+            <span class="text-2xl">📧</span>
+            <div><p class="text-white/60 text-xs uppercase tracking-wide mb-0.5">Email</p><p class="text-white text-sm font-semibold">support@ironnow.com</p></div>
+          </a>
+          <a href="tel:+919876543210" class="flex items-center gap-3 bg-white/10 hover:bg-white/20 border border-white/15 rounded-xl px-6 py-4 text-left transition-colors">
+            <span class="text-2xl">📞</span>
+            <div><p class="text-white/60 text-xs uppercase tracking-wide mb-0.5">Phone</p><p class="text-white text-sm font-semibold">+91 98765 43210</p></div>
+          </a>
+          <div class="flex items-center gap-3 bg-white/10 border border-white/15 rounded-xl px-6 py-4 text-left">
+            <span class="text-2xl">📍</span>
+            <div><p class="text-white/60 text-xs uppercase tracking-wide mb-0.5">Location</p><p class="text-white text-sm font-semibold">Bengaluru, Karnataka</p></div>
+          </div>
+        </div>
+
+        <a href="#home" class="inline-flex items-center gap-2 px-8 py-3.5 bg-white text-slate-900 font-black text-sm rounded-xl hover:bg-blue-50 transition-colors shadow-xl">
+          📅 Book Pickup
+        </a>
+        <p class="text-white/40 text-xs mt-3">No account needed · Takes less than 60 seconds</p>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══════════════════════════════════ -->
+<!--  FOOTER                             -->
+<!-- ═══════════════════════════════════ -->
+<footer class="bg-slate-950 text-white py-10 px-5 sm:px-8 lg:px-12" role="contentinfo">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-6 mb-6">
+      <a href="#home" class="flex items-center gap-2.5">
+        <img src="logo.png" alt="IronNow logo" class="h-9 w-auto object-contain" />
+        <div>
+          <div class="font-black text-white text-base leading-tight">IronNow</div>
+          <div class="text-[10px] text-slate-500 tracking-wide">On-Demand Ironing</div>
+        </div>
+      </a>
+
+      <nav class="flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm text-slate-400">
+        <a href="#home"         class="hover:text-white transition-colors">Home</a>
+        <a href="#about"        class="hover:text-white transition-colors">About</a>
+        <a href="#how-it-works" class="hover:text-white transition-colors">How It Works</a>
+        <a href="#features"     class="hover:text-white transition-colors">Features</a>
+        <a href="#tracking"     class="hover:text-white transition-colors">Tracking</a>
+        <a href="#contact"      class="hover:text-white transition-colors">Contact</a>
+      </nav>
+
+      <div class="flex gap-3">
+        <a href="#" aria-label="Twitter" class="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-400 hover:text-white hover:bg-[#2563EB] hover:border-[#2563EB] transition-all">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"/></svg>
+        </a>
+        <a href="#" aria-label="Instagram" class="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-400 hover:text-white hover:bg-pink-600 hover:border-pink-600 transition-all">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd"/></svg>
+        </a>
+        <a href="#" aria-label="LinkedIn" class="w-9 h-9 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center text-slate-400 hover:text-white hover:bg-blue-600 hover:border-blue-600 transition-all">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="border-t border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between gap-2 text-sm text-slate-500">
+      <span>© 2026 IronNow | Full Stack Development Project</span>
+      <span class="flex items-center gap-1">Made with <span class="text-red-500">♥</span> in Bengaluru, India</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('site-header').classList.toggle('scrolled', window.scrollY > 10);
+  }, { passive: true });
+
+  // Mobile menu
+  const hamBtn = document.getElementById('ham-btn');
+  const mobMenu = document.getElementById('mob-menu');
+  let open = false;
+  hamBtn.addEventListener('click', () => {
+    open = !open;
+    hamBtn.setAttribute('aria-expanded', open);
+    mobMenu.classList.toggle('open', open);
+  });
+  mobMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    open = false; hamBtn.setAttribute('aria-expanded', false); mobMenu.classList.remove('open');
+  }));
+
+  // Book button
+  document.getElementById('book-btn').addEventListener('click', () => {
+    const addr = document.getElementById('pickup-addr');
+    const garm = document.getElementById('garment-sel');
+    if (!addr.value.trim()) {
+      addr.style.borderColor = '#EF4444';
+      setTimeout(() => addr.style.borderColor = '', 2000);
+      addr.focus(); return;
+    }
+    if (!garm.value) {
+      garm.style.borderColor = '#EF4444';
+      setTimeout(() => garm.style.borderColor = '', 2000);
+      return;
+    }
+    const btn = document.getElementById('book-btn');
+    btn.textContent = '✅ Pickup Scheduled!';
+    btn.style.background = '#10B981';
+    setTimeout(() => { btn.textContent = '🚀 Schedule Pickup'; btn.style.background = ''; }, 3000);
+  });
+</script>
+</body>
+</html>
